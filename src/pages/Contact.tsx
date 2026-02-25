@@ -1,4 +1,5 @@
-import { Phone, Mail, MapPin, Clock, Instagram, MessageCircle } from "lucide-react";
+import { useState } from "react";
+import { Phone, Mail, MapPin, Clock, Instagram, MessageCircle, Send } from "lucide-react";
 
 const contactInfo = [
   { icon: Phone, label: "Phone", value: "+91 99669 09346", href: "tel:+919966909346" },
@@ -9,7 +10,37 @@ const contactInfo = [
   { icon: Instagram, label: "Instagram", value: "@kaizenpreschool", href: "https://instagram.com/kaizenpreschool" },
 ];
 
+interface ContactForm {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+}
+
 const Contact = () => {
+  const [form, setForm] = useState<ContactForm>({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleWhatsAppSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const { name, email, phone, message } = form;
+    if (!name.trim() || !email.trim() || !phone.trim() || !message.trim()) return;
+
+    const whatsappMessage = `Hello, I would like to enquire.\n\nName: ${name.trim()}\nEmail: ${email.trim()}\nPhone: ${phone.trim()}\nMessage: ${message.trim()}`;
+
+    const url = `https://wa.me/919966909346?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(url, "_blank");
+  };
+
   return (
     <div className="pt-16 md:pt-20">
       <section className="bg-kaizen-orange section-padding text-center">
@@ -27,12 +58,23 @@ const Contact = () => {
               </h2>
               <div className="space-y-4">
                 {contactInfo.map((item, i) => (
-                  <div key={i} className={`flex items-start gap-4 rounded-2xl p-5 kaizen-shadow ${(item as any).isWhatsApp ? 'bg-kaizen-green/10 border border-kaizen-green/20' : 'bg-card'}`}>
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${(item as any).isWhatsApp ? 'bg-kaizen-green/20 text-kaizen-green' : 'bg-primary/10 text-primary'}`}>
+                  <div
+                    key={i}
+                    className={`flex items-start gap-4 rounded-2xl p-5 kaizen-shadow ${
+                      item.isWhatsApp ? "bg-kaizen-green/10 border border-kaizen-green/20" : "bg-card"
+                    }`}
+                  >
+                    <div
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+                        item.isWhatsApp ? "bg-kaizen-green/20 text-kaizen-green" : "bg-primary/10 text-primary"
+                      }`}
+                    >
                       <item.icon size={20} />
                     </div>
                     <div>
-                      <div className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">{item.label}</div>
+                      <div className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">
+                        {item.label}
+                      </div>
                       {item.href ? (
                         <a
                           href={item.href}
@@ -65,6 +107,91 @@ const Contact = () => {
               />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* WhatsApp Message Form */}
+      <section className="section-padding bg-muted/50">
+        <div className="container mx-auto max-w-3xl">
+          <h2 className="text-2xl md:text-3xl font-black text-center mb-8">
+            Send a <span className="text-primary">Message</span>
+          </h2>
+
+          <form
+            onSubmit={handleWhatsAppSubmit}
+            className="bg-card rounded-2xl p-6 md:p-10 kaizen-shadow space-y-6"
+          >
+            <div>
+              <label className="block text-sm font-semibold mb-1.5">Your Name</label>
+              <input
+                type="text"
+                name="name"
+                required
+                value={form.name}
+                onChange={handleChange}
+                placeholder="Enter your name"
+                maxLength={100}
+                className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-sm"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold mb-1.5">Email Address</label>
+              <input
+                type="email"
+                name="email"
+                required
+                value={form.email}
+                onChange={handleChange}
+                placeholder="you@example.com"
+                maxLength={255}
+                className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-sm"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold mb-1.5">Phone Number</label>
+              <input
+                type="tel"
+                name="phone"
+                required
+                value={form.phone}
+                onChange={handleChange}
+                placeholder="Your phone number"
+                maxLength={15}
+                className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-sm"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold mb-1.5">Message</label>
+              <textarea
+                name="message"
+                required
+                rows={5}
+                value={form.message}
+                onChange={handleChange}
+                placeholder="Write your message here..."
+                maxLength={1000}
+                className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-sm resize-none"
+              />
+            </div>
+
+            {/* Submit Button */}
+            <div className="relative">
+              <button
+                type="submit"
+                className="w-full h-14 rounded-xl bg-primary text-primary-foreground font-bold text-base hover:opacity-90 transition-all shadow-lg flex items-center justify-center gap-3"
+              >
+                Send via WhatsApp
+                <Send size={18} />
+              </button>
+              {/* Floating WhatsApp icon */}
+              <div className="hidden md:flex absolute -bottom-3 -right-3 w-10 h-10 rounded-full bg-foreground text-primary-foreground items-center justify-center shadow-lg">
+                <MessageCircle size={18} />
+              </div>
+            </div>
+          </form>
         </div>
       </section>
     </div>
