@@ -111,7 +111,7 @@ const Contact = () => {
       </section>
 
       {/* WhatsApp Message Form */}
-      <section className="section-padding bg-muted/50">
+      <section className="section-padding bg-muted/50 hidden">
         <div className="container mx-auto max-w-3xl">
           <h2 className="text-2xl md:text-3xl font-black text-center mb-8">
             Send a <span className="text-primary">Message</span>

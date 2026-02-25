@@ -43,7 +43,7 @@ const Navbar = () => {
 
         <div className="hidden lg:block">
           <Link
-            to="/contact"
+            to="/admission"
             className="inline-flex items-center px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-bold text-sm hover:opacity-90 transition-opacity shadow-md"
           >
             📅 Book Visit
@@ -79,7 +79,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              to="/contact"
+              to="/admission"
               onClick={() => setIsOpen(false)}
               className="block mx-4 mt-3 text-center px-5 py-3 rounded-full bg-primary text-primary-foreground font-bold"
             >
