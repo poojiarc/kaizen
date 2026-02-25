@@ -13,7 +13,9 @@ const AdmissionsOpenBanner = () => {
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <a
-            href="tel:+919876543210"
+            href="https://wa.me/919966909346?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20admissions%20at%20Kaizen%20Preschool"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary-foreground text-primary font-bold hover:opacity-90 transition-opacity shadow-lg"
           >
             <Phone size={18} />
