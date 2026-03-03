@@ -29,7 +29,7 @@ const AdmissionsOpenBanner = () => {
           </Link>
         </div>
         <p className="text-primary-foreground/60 text-sm mt-6">
-          📍 Nallagandla, Hyderabad, Telangana
+          📍 Huda Layout Nallagandla
         </p>
       </div>
     </section>

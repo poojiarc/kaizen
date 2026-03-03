@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Phone, Mail, MapPin, Clock, Instagram, MessageCircle, Send } from "lucide-react";
 
 const contactInfo = [
-  { icon: Phone, label: "Phone", value: "+91 99669 09346", href: "tel:+919966909346" },
+  { icon: Phone, label: "Phone", value: "+91 81797 68181", href: "tel:+919966909346" },
   { icon: MessageCircle, label: "WhatsApp", value: "Chat with us on WhatsApp", href: "https://wa.me/919966909346?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20Kaizen%20Preschool", isWhatsApp: true },
   { icon: Mail, label: "Email", value: "info@kaizenpreschool.in", href: "mailto:info@kaizenpreschool.in" },
-  { icon: MapPin, label: "Address", value: "Nallagandla, Hyderabad, Telangana 500019" },
+  { icon: MapPin, label: "Address", value: "Huda Layout Nallagandla 500019" },
   { icon: Clock, label: "Working Hours", value: "Mon–Sat: 8:30 AM – 4:00 PM" },
   { icon: Instagram, label: "Instagram", value: "@kaizenpreschool", href: "https://instagram.com/kaizenpreschool" },
 ];
